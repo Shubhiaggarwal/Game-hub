@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="numbergame.css" />
+</head>
+<body>
+  <a href="gamehub.html" class="back-button">⬅️ Back to Game Hub</a>
+  <!-- <img src="Screenshot 2025-07-23 023622.png" 
+     alt="Game Logo" 
+     id="cornerLogo" /> -->
+
+     <!-- Left Logo (already present) -->
+<img src="https://cdn-icons-png.flaticon.com/512/417/417776.png" 
+     alt="Game Logo" 
+     id="cornerLogoLeft"
+     title="🎮 Welcome to the Guessing Game!" />
+
+<!-- 🆕 Right Logo -->
+<img src="images/image.png" 
+     alt="Settings or Crown" 
+     id="cornerLogoRight"
+     
+
+
+  <div class = "game-wrapper">
+  <div class="container">
+    <h1> 4-Digit Number Guessing Game</h1>
+    <p><strong> Player:</strong> <span id="playerName">---</span></p>
+    <h4>Guess the 4-digit number!</h4>
+
+    <p><strong> Time Left:</strong> <span id="timer">300</span> seconds</p>
+    <p><strong> Best Score:</strong> <span id="highScore">--</span> attempts</p>
+
+    <input type="number" id="guessInput" placeholder="Enter 4-digit number" />
+    <button onclick="checkGuess()">Submit</button>
+    <button onclick="restartGame()">Restart</button>
+
+    <p id="result"></p>
+
+   
+
+    <div id="confetti-container"></div>
+
+    <div id="popup" class="hidden">
+      <h2 id="popupMessage"></h2>
+      <p id="popupSubText"></p>
+    </div>
+  
+ 
+
+  <!-- Sound effects -->
+  <audio id="winSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
+  <audio id="clickSound" src="sound/numberclick.wav"></audio>
+  <audio id="errorSound" src="sound/error sound.wav"></audio>
+
+  <script src="numbergame.js"></script>
+  
+</div>
+</div>
+ <div id="attemptsBox">
+      <h2 style="color: aliceblue;"> Your Attempts:</h2>
+      <ul style="color: aliceblue;" id="attemptList"></ul>
+    </div>
+</body>
+</html>
