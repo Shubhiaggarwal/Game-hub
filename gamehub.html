@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Game Hub</title>
+  <link rel="stylesheet" href="gamehubstyle.css">
+  <style>
+    body {
+      background-image: url('images/gamehubbackground.bmp');
+      background-size: cover;
+      background-position: center;
+      background-color: #d7f241;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #2f4f4f;
+      margin-bottom: 40px;
+    }
+
+    .game-list {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .game-card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      width: 250px;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .game-card h2 {
+      margin: 15px 0 8px;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .game-card p {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .game-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #af2e2e;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎮 Welcome to Game Hub</h1>
+
+  <!-- 🔊 Audio element for shared sound -->
+  <audio id="selectSound" src="sound/clicksound.wav" preload="auto"></audio>
+
+  <div class="game-list">
+    <div class="game-card">
+      <a href="puzzleindex.html" onclick="event.preventDefault(); playAndGo(this.href);">
+        <img src="images/puzzlegame.png" alt="Sliding Puzzle" />
+        <h2>🧩 Sliding Puzzle Game</h2>
+        <h5>Arrange slides in correct order to win!</h5>
+      </a>
+    </div>
+
+    <div class="game-card">
+      <a href="numbergame.html" onclick="event.preventDefault(); playAndGo(this.href);">
+        <img src="images/numbergame.png" alt="Number Guessing Game" />
+        <h2>🔢 Number Guessing Game</h2>
+        <h5>Guess the number in minimum attempts!</h5>
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ Inline JS to play sound and redirect -->
+  <script>
+    function playAndGo(url) {
+      const audio = document.getElementById("selectSound");
+      audio.play();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300); // Adjust delay if needed
+    }
+  </script>
+
+</body>
+</html>
