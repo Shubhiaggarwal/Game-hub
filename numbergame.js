@@ -3,40 +3,40 @@ let attempts = 0;
 let timer;
 let timeLeft = 300;
 let playerName = "";
-let highScore = localStorage.getItem("highScore") || null;
+let highScore = localStorage.getItem("highScore") || null;//retrieve saved high scorefrom local storage
 let highScoreName = localStorage.getItem("highScoreName") || null;
-const timerDisplay = document.getElementById("timer");
-const highScoreDisplay = document.getElementById("highScore");
-const winSound = document.getElementById("winSound");
-const clickSound = document.getElementById("clickSound");
-const errorSound = document.getElementById("errorSound");
+const timerDisplay = document.getElementById("timer");//timer dispay
+const highScoreDisplay = document.getElementById("highScore");// high score dispay
+const winSound = document.getElementById("winSound");//sound element
+const clickSound = document.getElementById("clickSound");//sound element
+const errorSound = document.getElementById("errorSound");//sound element
 
 
 
-
+// function playername
 function promptName() {
   playerName = prompt("Enter your name:")?.trim() || "Player";
-  document.getElementById("playerName").textContent = playerName;
+  document.getElementById("playerName").textContent = playerName;//display player name
 }
 
 function startGame() {
-  promptName();
+  promptName();//function playername
   secret = generateNumber();
   attempts = 0;
   timeLeft = 300;
-  document.getElementById("attemptList").innerHTML = "";
-  document.getElementById("result").textContent = "";
+  document.getElementById("attemptList").innerHTML = "";//clear previous attempts
+  document.getElementById("result").textContent = "";//clear result message
   document.getElementById("popup").classList.add("hidden");
   document.getElementById("guessInput").value = "";
-  clearConfetti();
+  clearConfetti();//clear previous confetti animation
   timerDisplay.textContent = timeLeft;
 
   clearInterval(timer);
-  timer = setInterval(updateTimer, 1000);
+  timer = setInterval(updateTimer, 1000);//start countdown timer
 
   // Display high score if available
-  highScore = localStorage.getItem("highScore");
-  highScoreName = localStorage.getItem("highScoreName");
+  highScore = localStorage.getItem("highScore");//refetch hiscore
+  highScoreName = localStorage.getItem("highScoreName");//refetch hiscore player
   if (highScore && highScoreName) {
     highScoreDisplay.textContent = `${highScoreName} 👑 - ${highScore} attempts`;
   } else {
@@ -44,7 +44,7 @@ function startGame() {
   }
 }
 
-
+//function to generate four digit number
 function generateNumber() {
   return Math.floor(1000 + Math.random() * 9000);
 }
