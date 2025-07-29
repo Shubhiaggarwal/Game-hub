@@ -34,12 +34,20 @@ function startGame() {
   clearInterval(timer);
   timer = setInterval(updateTimer, 1000);//start countdown timer
 
-  // Display high score if available
-  highScore = localStorage.getItem("highScore");//refetch hiscore
-  highScoreName = localStorage.getItem("highScoreName");//refetch hiscore player
-  if (highScore && highScoreName) {
+    // Re-check localStorage
+  const storedScore = localStorage.getItem("highScore");
+  const storedName = localStorage.getItem("highScoreName");
+
+  // If high score exists, display it
+  if (storedScore && storedName) {
+    highScore = storedScore;
+    highScoreName = storedName;
     highScoreDisplay.textContent = `${highScoreName} 👑 - ${highScore} attempts`;
-  } else {
+  }
+  // If high score was cleared, don't show anything
+  else {
+    highScore = null;
+    highScoreName = null;
     highScoreDisplay.textContent = "--";
   }
 }
