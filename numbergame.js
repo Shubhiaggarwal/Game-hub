@@ -46,28 +46,28 @@ function startGame() {
 
 //function to generate four digit number
 function generateNumber() {
-  return Math.floor(1000 + Math.random() * 9000);
+  return Math.floor(1000 + Math.random() * 9000);//generate a number between 1000 and 9999
 }
 
 function checkGuess() {
-  const input = document.getElementById("guessInput");
-  const guess = parseInt(input.value);
+  const input = document.getElementById("guessInput");//input field
+  const guess = parseInt(input.value);//convert value to number
   const result = document.getElementById("result");
   const attemptList = document.getElementById("attemptList");
-
+//error condition
   if (isNaN(guess) || guess < 1000 || guess > 9999) {
     result.textContent = "❌ Please enter a valid 4-digit number.";
-    errorSound.play();
+    errorSound.play();//play error sound
     return;
   }
 
-  clickSound.play();
-  attempts++;
+  clickSound.play();//play click sound
+  attempts++;// increment attemp count
 
   let correct = 0;
   let guessCopy = guess;
   let secretCopy = secret;
-
+// it will check whether you entre a correct number or not
   for (let i = 0; i < 4; i++) {
     if (guessCopy % 10 === secretCopy % 10) {
       correct++;
@@ -75,22 +75,22 @@ function checkGuess() {
     guessCopy = Math.floor(guessCopy / 10);
     secretCopy = Math.floor(secretCopy / 10);
   }
-
+//crete a new list item to show the result
   const li = document.createElement("li");
   li.textContent = `Attempt ${attempts}: ${guess} → ${correct} correct`;
-  attemptList.appendChild(li);
-
+  attemptList.appendChild(li);//add the attenpt to list
+// win condition
   if (correct === 4) {
     result.textContent = `🎉 ${playerName}, you win in ${attempts} attempts! The number was ${secret}.`;
-    winSound.play();
+    winSound.play();//win sound
     showPopup(`🎉 Congratulations, ${playerName}!`, `You guessed it in ${attempts} attempts.`);
-    launchConfetti();
-    clearInterval(timer);
-
+    launchConfetti();//trigger confetti animation
+    clearInterval(timer);//stop the time
+//update highscore
     if (!highScore || attempts < highScore) {
   localStorage.setItem("highScore", attempts);
   localStorage.setItem("highScoreName", playerName);
-  highScoreDisplay.textContent = `${playerName} 👑 - ${attempts} attempts`;
+  highScoreDisplay.textContent = `${playerName} 👑 - ${attempts} attempts`;//update display
 }
 
 
@@ -98,43 +98,45 @@ function checkGuess() {
     result.textContent = `Try again! ${correct} digit(s) correct in the right position.`;
   }
 
-  input.value = "";
+  input.value = "";//clear input for next guess
 }
-
+//to update timmer every second
 function updateTimer() {
   timeLeft--;
   timerDisplay.textContent = timeLeft;
+  //time over condition
   if (timeLeft <= 0) {
     clearInterval(timer);
     document.getElementById("result").textContent = `⏰ Oops, time's up! The number was ${secret}`;
     showPopup("⏰ Time's Over!", `Better luck next time, ${playerName}.`);
   }
 }
-
+// function to display pop up message
 function showPopup(title, subtitle) {
   document.getElementById("popupMessage").textContent = title;
   document.getElementById("popupSubText").textContent = subtitle;
   document.getElementById("popup").classList.remove("hidden");
 }
 
-function restartGame() {
+function restartGame() { // restart game
   startGame();
 }
-
+// confetti animation
 function launchConfetti() {
-  const container = document.getElementById("confetti-container");
+  const container = document.getElementById("confetti-container");//get confetti container
   for (let i = 0; i < 100; i++) {
-    const confetti = document.createElement("div");
+    const confetti = document.createElement("div");//creat new div
     confetti.textContent = "🎊";
-    confetti.style.position = "absolute";
-    confetti.style.fontSize = "20px";
-    confetti.style.top = Math.random() * 100 + "%";
-    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.position = "absolute";//absolute on display
+    confetti.style.fontSize = "20px";//set size
+    confetti.style.top = Math.random() * 100 + "%";// Random vertical position
+    confetti.style.left = Math.random() * 100 + "%";// Random horizontal position
     confetti.style.animation = `fall ${Math.random() * 2 + 2}s linear`;
     container.appendChild(confetti);
   }
-  setTimeout(clearConfetti, 4000);
+  setTimeout(clearConfetti, 6000);//clear confetti
 }
+//reset high score
 function resetHighScore() {
   localStorage.removeItem("highScore");
   localStorage.removeItem("highScoreName");
